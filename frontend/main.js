@@ -3,14 +3,32 @@ angular.module("vigenereApp", [])
     $scope.encodeInput = "";
     $scope.encodeKey = "key";
     $scope.encodeOutput = "";
+    $scope.encodeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    $scope.encodePreserveChars = true;
 
     $scope.$watch("encodeKey", () => {
       $scope.encodeKey = $scope.encodeKey.replaceAll(/[^a-zA-Z]/g, "");
     });
 
-    $scope.$watch("[encodeInput, encodeKey]", () => {
-      $scope.encodeOutput = encode($scope.encodeInput ?? "", $scope.encodeKey ?? "");
+    $scope.$watch("[encodeInput, encodeKey, encodeAlphabet, encodePreserveChars]", () => {
+      $scope.encodeOutput = encode($scope.encodeInput ?? "", $scope.encodeKey ?? "", $scope.encodeAlphabet ?? "", $scope.encodePreserveChars ?? true);
     });
+
+    $scope.copyEncodeOutput = () => {
+      const elemTextarea = document.getElementsByClassName("encodeTextarea")[0]
+      elemTextarea.select();
+      elemTextarea.setSelectionRange(0, 99999); 
+      navigator.clipboard.writeText(elemTextarea.value);
+
+      const ANIMATION_MS = 500;
+      const elemAlert = document.getElementsByClassName("encodeTextareaCopyAlert")[0]
+      elemAlert.classList.add('animate');
+      setTimeout(() => {elemAlert.classList.remove('animate')}, ANIMATION_MS )
+    }
+
+    $scope.encodeMoreOptions = false;
+
+
   }]);
 
 /*String*/ function cleanse(in_str) {
@@ -18,12 +36,15 @@ angular.module("vigenereApp", [])
   return out_str;
 }
 
-/*String*/ function encode(in_str, in_key) {
-  const VALID_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  // dprint-ignore
-  const TOLET = { 0: "A", 1: "B", 2: "C", 3: "D", 4: "E", 5: "F", 6: "G", 7: "H", 8: "I", 9: "J", 10: "K", 11: "L", 12: "M", 13: "N", 14: "O", 15: "P", 16: "Q", 17: "R", 18: "S", 19: "T", 20: "U", 21: "V", 22: "W", 23: "X", 24: "Y", 25: "Z" };
-  // dprint-ignore
-  const TONUM = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5, "G": 6, "H": 7, "I": 8, "J": 9, "K": 10, "L": 11, "M": 12, "N": 13, "O": 14, "P": 15, "Q": 16, "R": 17, "S": 18, "T": 19, "U": 20, "V": 21, "W": 22, "X": 23, "Y": 24, "Z": 25 };
+/*String*/ function encode(in_str, in_key, in_alphabet, cond_preserve_chars) {
+  const VALID_CHARS = in_alphabet;
+  const TOLET = {};
+  const TONUM = {};
+  for (let i = 0; i < VALID_CHARS.length; i++) {
+    TOLET[i] = VALID_CHARS[i];
+    TONUM[VALID_CHARS[i]] = i
+  }
+  
   let key_i = 0;
   let out_str = "";
   in_str = cleanse(in_str);
@@ -35,7 +56,7 @@ angular.module("vigenereApp", [])
 
   for (let i = 0; i < in_str.length; i++) {
     if (!VALID_CHARS.includes(in_str[i])) {
-      out_str += in_str[i];
+      if(cond_preserve_chars || in_str[i] === " ") {out_str += in_str[i]};
       continue;
     }
 

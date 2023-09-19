@@ -2,10 +2,14 @@
 
 @rgb-text: #f6f2dd;
 @rgb-background: #1a011c;
-@rgb-primary: #7c0a35;
-@rgb-secondary: #e17eae;
+@rgb-text-background: #010010;
+@rgb-primary: #27075a;
+@rgb-secondary: #400342;
 @rgb-accent: #57ddcb;
 @rgb-shadow: #000000;
+@rgb-util-on: #9f1d5e;
+@rgb-util-on2: #036a33;
+@rgb-util-off: #666666;
 
 @drop-shadow: 0 10px 5px @rgb-shadow;
 @text-shadow: 0 2.5px 0px @rgb-shadow;
@@ -41,11 +45,59 @@
 body {
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inline { 
+    display: inline;
+}
+.add-ln-padding {
+    padding: 1em 0em;
+}
+
+/* CARD -------------------------------------------- */
+
+.card {
+    border-radius: 50px;
+    padding: 2em;
+    margin: 1em;
+    box-shadow: @drop-shadow;
+    display: block; 
+}
+
+
+.card.primary {
+    background-color: @rgb-primary;
+}
+.card.secondary {
+    background-color: @rgb-secondary;
+}
+
+.input-output-wrapper {
+  display: flex;
+  flex-direction: row;  
+  align-items: center;
+}
+.input-output-wrapper > h3 {
+    margin: 1em;
+}
+
+/* ENCODE STUFF ------------------------------------- */
+
+.encode-more-options {
+    margin: 1em 0em;
+}
+
+.encode-alphabet {
+    width: 80%;
 }
 
 /* HEADER ------------------------------------------- */
 
 header {
+    width: 92%;
     background-color: @rgb-primary;
     margin: 0em;
     padding: 1em;
@@ -60,10 +112,87 @@ h1 {
 }
 
 h2 {
-    font-weight: 300;
-    font-style: italic;
+    font-weight: 500;
     line-height: 0.5em;
     text-shadow: @text-shadow;
+    margin: 0.75em 0em;
+}
+
+h3 {
+    font-weight: 300;
+    line-height: 0.5em;
+    text-shadow: @text-shadow; 
+    margin: 0.75em 0em ;
+}
+
+/* UTIL:TEXTINPUTS --------------------------------- */
+
+textarea, .text-input {
+    background: @rgb-text-background;
+    resize: none;
+    color: inherit;
+    border: none;
+    outline: @rgb-text 2px solid;
+    padding: 0.5em;
+    border-radius: 10px;
+    box-shadow: @text-shadow;
+}
+textarea {
+    scrollbar-gutter: stable;
+    overflow: scroll; 
+}
+
+textarea:focus, .text-input:focus {
+    border: none;
+    outline: @rgb-text 3px solid;
+    
+}
+
+.textarea-wrapper {
+    display: grid;
+    position: relative;
+
+}
+.textarea-wrapper > * {
+    grid-column: 1; grid-row: 1;
+}
+
+.textarea-wrapper > label {
+    position: absolute;
+    bottom: 1.1em;
+    right: 2.75em;
+    animation: copiedLabel forwards 0.4s;
+
+    transition: 0.25s ease-in;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(130%);
+}
+
+.textarea-wrapper > label.animate {
+    transition: 0.25s ease-out;
+    width: auto;
+    opacity: 1;
+    transform: translateY(0);
+    
+}
+
+.copy-button {
+    position: absolute;
+    bottom: 1em;
+    right: 0.75em;
+    color: inherit;
+    width: min-content;
+    aspect-ratio: 1;
+    background: none;
+    font-family: inherit;
+    border: none;
+    border-radius: 10px;
+    display: inline;
+}
+.copy-button:hover {
+    color: @rgb-text-background;
+    background-color: @rgb-text;
 }
 
 /* UTIL:SLIDER ------------------------------------- */
@@ -72,8 +201,10 @@ h2 {
 .switch {
     position: relative;
     display: inline-block;
-    width: 4em;
-    height: 2em;
+    width: 3em;
+    height: 1.5em;
+    transform: translateY(-0.5em);
+    
   }
   
   .switch input {
@@ -89,39 +220,37 @@ h2 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: @rgb-util-off;
     -webkit-transition: .4s;
     transition: .4s;
+    box-shadow: @text-shadow;
   }
   
   .slider:before {
     position: absolute;
     content: "";
-    height: 1.5em;
-    width: 1.5em;
+    height: 1em;
+    width: 1em;
     left: 0.25em;
     bottom: 0.25em;
-    background-color: white;
+    background-color: @rgb-text;
     -webkit-transition: .4s;
     transition: .4s;
   }
   
   input:checked + .slider {
-    background-color: #2196F3;
-  }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    background-color: @rgb-util-on;
   }
   
   input:checked + .slider:before {
-    -webkit-transform: translateX(2em);
-    -ms-transform: translateX(2em);
-    transform: translateX(2em);
+    -webkit-transform: translateX(1.5em);
+    -ms-transform: translateX(1.5em);
+    transform: translateX(1.5em);
   }
   
   .slider.round {
     border-radius: 34px;
+    
   }
   
   .slider.round:before {

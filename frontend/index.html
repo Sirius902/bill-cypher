@@ -16,23 +16,62 @@
   </header>
 
   <main ng-app="vigenereApp" ng-controller="vigenereController">
-
-    Encode
-    <label class="switch">
-      <input type="checkbox">
-      <span class="slider round"></span>
-    </label>
-    Decode
-    
-    <div class="card">
-      <h2 class="cardtitle">
-        Encode/Decode
-      </h2>
-      <textarea ng-model="encodeInput" class="content" name="" cols="30" rows="10" placeholder="Enter text to encode..."></textarea>
-      <input ng-model="encodeKey" class="content" type="text">
-      <textarea ng-model="encodeOutput" class="content" readonly name="" id="" cols="30" rows="10"></textarea>
+    <div class="card secondary">
+      <h2 class="inline">Encode</h2>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider round"></span>
+      </label>
+      <h2 class="inline">Decode</h2>
     </div>
-    <div class="card">
+  
+    <div class="card primary">
+      <section class="encode">
+        <h2 class="cardtitle">
+          Encode
+        </h2>
+        <div class="input-output-wrapper">
+          <div>
+            <h3>📝 plaintext</h3>
+            <textarea ng-model="encodeInput" class="content" name="" cols="30" rows="10" placeholder="Enter text to encode..."></textarea>
+          </div>
+          <h3> ➡️ </h3>
+          <div>
+            <h3>🔏 ciphertext </h3>
+            <div class="textarea-wrapper">
+              <textarea ng-model="encodeOutput" class="content encodeTextarea" readonly name="" id="" cols="30" rows="10" placeholder="Encoded text will show up here..."></textarea>
+              <button class="copy-button" id="encode-copy-button" ng-click="copyEncodeOutput()">📋</button>
+              <label class="encodeTextareaCopyAlert" for="encode-copy-button">ciphertext copied!</label>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <h3>🔑 key</h3>
+        <input ng-model="encodeKey" class="text-input content" type="text">
+        <h3 class="add-ln-padding">
+          ⚙️ more options  
+          <label class="switch">
+            <input type="checkbox" ng-model="encodeMoreOptions">
+            <span class="slider round"></span>
+          </label> 
+        </h3>
+        
+        <div class="encode-more-options" ng-show="encodeMoreOptions" >
+          <h3>📓 alphabet</h3>
+          <input ng-model="encodeAlphabet" class="text-input encode-alphabet content" type="text">
+          <br class="add-ln-padding"/>
+          <h3 class="add-ln-padding">
+            📎 preserve non-alphabetical characters 
+            <label class="switch">
+              <input type="checkbox" ng-model="encodePreserveChars">
+              <span class="slider round"></span>
+            </label> 
+          </h3>
+        </div>
+
+      </section>
+    </div>
+    <div class="card secondary">
       <h2 class="cardtitle">
         About
       </h2>
