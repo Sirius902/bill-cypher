@@ -9,9 +9,21 @@
   <script type="module" src="/main.js" defer></script>
 </head>
 <body>
-  <main ng-app="testApp" ng-controller="testController">
-    <input ng-model="testInput" type="text">
-    <div>{{ testInput }}</div>
+  
+  <header class="header">
+    <h1>Vignère Encoder and Decoder</h1>
+    <h2>by NSDawn and Sirius902</h2>
+  </header>
+
+  <main ng-app="vigenereApp" ng-controller="vigenereController">
+
+    <button>Encoding Mode</button>
+    <div class="card">
+      <textarea ng-model="encodeInput" name="" cols="30" rows="10" placeholder="Enter text to encode..."></textarea>
+      <input ng-model="encodeKey" type="text">
+
+      <textarea ng-model="encodeOutput" readonly name="" id="" cols="30" rows="10"></textarea>
+    </div>
   </main>
 </body>
 </html>
