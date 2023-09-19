@@ -11,6 +11,11 @@
   "devDependencies": {
     "@types/angularjs": "^1.5.14-alpha",
     "less": "^4.2.0",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "bun-types": "latest"
+  },
+  "module": "index.ts",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
