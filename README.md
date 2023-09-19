@@ -13,3 +13,17 @@ This app make for our enrichment and knowledge.
 * Tora: meow
 
 (This readme is a joke)
+
+### 🐔 Chicken pipeline
+Our creators support and evangelize the Chicken pipeline, which allows for seameless transfer of protein and calorie data modules in the form of structs such as leg, thigh, and breast into the Stomach framework.
+```
+🥚                  -> 🐥                 -> 
+Chiken factory      Chicken prototype        
+
+🐓                  -> 🍗                                                           
+Chicken instance    Chicken (wrapped)
+                  ^
+                🧂 Salt & Pepper (Dependency Injection)                                       
+                                          
+``` 
+
