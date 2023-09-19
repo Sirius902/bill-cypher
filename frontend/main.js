@@ -41,7 +41,7 @@ angular.module("vigenereApp", [])
     }
 
     out_str += TOLET[
-      (TONUM[in_str[i]] + TONUM[in_key[key_i]] + 1) % 26
+      (TONUM[in_str[i]] + TONUM[in_key[key_i]]) % 26
     ];
 
     key_i = (key_i + 1) % in_key.length;
