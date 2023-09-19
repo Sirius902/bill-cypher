@@ -11,18 +11,31 @@
 <body>
   
   <header class="header">
-    <h1>Vignère Encoder and Decoder</h1>
-    <h2>by NSDawn and Sirius902</h2>
+    <h1>🔏 Vigenère Encoder and Decoder</h1>
+    <h2>by NSDawn and Sirius209</h2>
   </header>
 
   <main ng-app="vigenereApp" ng-controller="vigenereController">
 
-    <button>Encoding Mode</button>
+    Encode
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider round"></span>
+    </label>
+    Decode
+    
     <div class="card">
-      <textarea ng-model="encodeInput" name="" cols="30" rows="10" placeholder="Enter text to encode..."></textarea>
-      <input ng-model="encodeKey" type="text">
-
-      <textarea ng-model="encodeOutput" readonly name="" id="" cols="30" rows="10"></textarea>
+      <h2 class="cardtitle">
+        Encode/Decode
+      </h2>
+      <textarea ng-model="encodeInput" class="content" name="" cols="30" rows="10" placeholder="Enter text to encode..."></textarea>
+      <input ng-model="encodeKey" class="content" type="text">
+      <textarea ng-model="encodeOutput" class="content" readonly name="" id="" cols="30" rows="10"></textarea>
+    </div>
+    <div class="card">
+      <h2 class="cardtitle">
+        About
+      </h2>
     </div>
   </main>
 </body>

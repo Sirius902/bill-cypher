@@ -14,7 +14,6 @@ angular.module("vigenereApp", [])
   }]);
 
 /*String*/ function cleanse(in_str) {
-  console.log(in_str);
   let out_str = in_str.toUpperCase();
   return out_str;
 }
