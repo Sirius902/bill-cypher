@@ -56,5 +56,5 @@ func decodeHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 	}
 
-	fmt.Fprintf(w, "%#v\n", decodeReq)
+	fmt.Fprintf(w, "%s", DecodeCipher(decodeReq.Value, decodeReq.Key))
 }
