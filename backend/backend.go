@@ -21,9 +21,8 @@ func main() {
 }
 
 type decodeRequest struct {
-	Value      string   `json:"value"`
-	Key        string   `json:"key"`
-	Dictionary []string `json:"dictionary"`
+	Value string `json:"value"`
+	Key   string `json:"key"`
 }
 
 func decodeHandler(w http.ResponseWriter, r *http.Request) {
