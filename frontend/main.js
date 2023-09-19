@@ -6,8 +6,17 @@ angular.module("vigenereApp", [])
     $scope.encodeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     $scope.encodePreserveChars = true;
 
-    $scope.$watch("encodeKey", () => {
-      $scope.encodeKey = $scope.encodeKey.replaceAll(/[^a-zA-Z]/g, "");
+    $scope.$watch("[encodeKey, encodeAlphabet]", () => {
+      
+      let cleansedKey = "";
+      for (let i = 0; i < $scope.encodeKey.length; i ++) {
+        if ($scope.encodeAlphabet.includes($scope.encodeKey[i].toUpperCase()) || $scope.encodeAlphabet.includes($scope.encodeKey[i].toLowerCase())) {
+          cleansedKey += $scope.encodeKey[i];
+        }
+      }
+      
+      $scope.encodeKey = cleansedKey;
+      
     });
 
     $scope.$watch("[encodeInput, encodeKey, encodeAlphabet, encodePreserveChars]", () => {
@@ -37,7 +46,7 @@ angular.module("vigenereApp", [])
 }
 
 /*String*/ function encode(in_str, in_key, in_alphabet, cond_preserve_chars) {
-  const VALID_CHARS = in_alphabet;
+  const VALID_CHARS = in_alphabet.toUpperCase( );
   const TOLET = {};
   const TONUM = {};
   for (let i = 0; i < VALID_CHARS.length; i++) {
@@ -61,7 +70,7 @@ angular.module("vigenereApp", [])
     }
 
     out_str += TOLET[
-      (TONUM[in_str[i]] + TONUM[in_key[key_i]]) % 26
+      (TONUM[in_str[i]] + TONUM[in_key[key_i]]) % VALID_CHARS.length
     ];
 
     key_i = (key_i + 1) % in_key.length;
