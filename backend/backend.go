@@ -5,10 +5,13 @@ import (
 
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
 	e := echo.New()
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 	e.Validator = &CustomValidator{validator: validator.New()}
 	e.POST("/decode", decodeHandler)
 	e.Logger.Fatal(e.Start(":8000"))
